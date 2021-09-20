@@ -1,7 +1,7 @@
 import re
 
-from utils import quote
-from constants import ID_OK_RE
+from .utils import quote
+from .constants import ID_OK_RE
 
 
 class Encoder(object):
@@ -13,7 +13,7 @@ class Encoder(object):
     def encoder(v):
         if isinstance(v, list):
             return Encoder.list
-        elif isinstance(v, (str, basestring)):
+        elif isinstance(v, str):
             return Encoder.string
         elif isinstance(v, bool):
             return Encoder.bool
@@ -40,7 +40,7 @@ class Encoder(object):
             f = Encoder.encoder(v)
             if f:
                 v = f(v)
-                if isinstance(v, (str, basestring)):
+                if isinstance(v, str):
                     if b:
                         a.append(',')
                     a.append(v)
@@ -87,7 +87,7 @@ class Encoder(object):
             f = Encoder.encoder(v)
             if f:
                 v = f(v)
-                if isinstance(v, (str, basestring)):
+                if isinstance(v, str):
                     if b:
                         a.append(',')
                     a.append(Encoder.string(i))
